@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: rgb(255, 255, 255);
+}
+
+#container {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+header {
+  background-color: black;
+  width: 100vw;
+  display: grid;
+  justify-content: center;
+  font-size: large;
+}
+
+main {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  grid-template-columns: 1fr 4fr;
+  font-size: 2rem;
+}
+
+#left {
+  background-color: rgb(94, 121, 121);
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+#Right {
+  background-color: rgb(99, 60, 60);
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.image {
+  height: 40px;
+  width: 40px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.leftDiv h4 {
+  display: inline;
+}
+
+.leftDiv {
+  margin: 10px;
+}
