@@ -7,9 +7,11 @@ class todo {
   }
 }
 
-function Project(name) {
-  this.name = name;
-  this.todo = [];
+class Project {
+  constructor(name) {
+    this.name = name;
+    this.todo = [];
+  }
 }
 
 export { todo, Project };
