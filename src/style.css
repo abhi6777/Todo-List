@@ -11,7 +11,7 @@ body {
 }
 
 header {
-  background-color: black;
+  background-color: rgb(21, 21, 19);
   width: 100vw;
   display: grid;
   justify-content: center;
@@ -27,7 +27,7 @@ main {
 }
 
 #left {
-  background-color: rgb(94, 121, 121);
+  background-color: rgb(30, 28, 28);
   display: flex;
   justify-content: flex-start;
   height: 100vh;
@@ -36,7 +36,7 @@ main {
 }
 
 #Right {
-  background-color: rgb(99, 60, 60);
+  background-color: rgb(54, 53, 53);
   display: flex;
   justify-content: flex-start;
   height: 100vh;
@@ -80,13 +80,29 @@ a {
 }
 
 .todoDiv {
-  background-color: aqua;
+  background-color: rgb(125, 125, 167);
   padding-right: 2rem;
   padding-left: 2rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
   margin-bottom: 1rem;
 }
 
 .todoDiv div p {
-  margin: 10px;
+  margin: 5px;
+}
+
+#delete,
+#Done {
+  margin-left: 20px;
+  cursor: pointer;
+  color: red;
+  text-decoration: none;
+}
+
+#Done {
+  transform: scale(2);
+}
+
+.strike {
+  text-decoration: line-through;
 }

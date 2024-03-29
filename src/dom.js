@@ -47,11 +47,11 @@ let right_side = () => {
 
 function showTodo(projectName) {
   // Find the project instance based on the project name
-  let project = projectsList.find(project => project.name === projectName);
+  let project = projectsList.find((project) => project.name === projectName);
 
   // If the project is found, display its todo items
   if (project) {
-    project.todo.forEach(todoItem => {
+    project.todo.forEach((todoItem) => {
       // Dividing into different part for better looks
       let todoContainer = document.createElement("div");
       todoContainer.classList.add("todoDiv");
@@ -65,8 +65,8 @@ function showTodo(projectName) {
       secondLine.classList.add("secondLine");
       todoContainer.appendChild(secondLine);
 
-      // Main part 
-      // Line First
+      // Main part
+      // Line First   
       let todoTitle = document.createElement("p");
       todoTitle.textContent = todoItem.title;
       firstLine.appendChild(todoTitle);
@@ -75,7 +75,12 @@ function showTodo(projectName) {
       todoDueDate.textContent = todoItem.dueDate;
       firstLine.appendChild(todoDueDate);
 
-      // Line second
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.id = "Done";
+      todoDueDate.appendChild(checkbox);
+
+      // Line second     
       let todoDescription = document.createElement("p");
       todoDescription.textContent = todoItem.description;
       secondLine.appendChild(todoDescription);
@@ -83,13 +88,16 @@ function showTodo(projectName) {
       let todoPriority = document.createElement("p");
       todoPriority.textContent = "Priority: " + todoItem.priority;
       secondLine.appendChild(todoPriority);
+      
+      const span = document.createElement('span');
+      span.innerHTML = "&#128465;";
+      span.id = "delete";
+      todoPriority.appendChild(span);
     });
   } else {
     todoContainer.textContent = "Add one";
   }
 }
-
-
 
 export { left_side, right_side, showProject };
 export { showTodo };
