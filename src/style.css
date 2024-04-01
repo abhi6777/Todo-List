@@ -42,6 +42,15 @@ main {
   height: 100vh;
   flex-direction: column;
   align-items: center;
+  overflow-x: scroll;
+}
+
+#Right::-webkit-scrollbar {
+  display: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .image {
@@ -91,18 +100,28 @@ a {
   margin: 5px;
 }
 
-#delete,
-#Done {
+.remove,
+.Done {
   margin-left: 20px;
   cursor: pointer;
   color: red;
   text-decoration: none;
 }
 
-#Done {
+.Done {
   transform: scale(2);
 }
 
 .strike {
   text-decoration: line-through;
+}
+
+.projectShow {
+  background-color: rgb(0, 0, 0);
+  padding-right: 2rem;
+  padding-left: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border: 2px solid white;
+  border-radius: 0.7rem;
 }

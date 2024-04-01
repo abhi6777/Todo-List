@@ -31,6 +31,7 @@ function showProject() {
 
   projectsList.forEach((project) => {
     let projectElement = document.createElement("p");
+    projectElement.classList.add("project");
     projectElement.textContent = project.name;
     projectDiv.appendChild(projectElement);
   });
@@ -51,6 +52,13 @@ function showTodo(projectName) {
 
   // If the project is found, display its todo items
   if (project) {
+    // Remove previous projects todo
+    let todo = document.querySelectorAll(".todoDiv");
+    todo.forEach(todo => {
+      todo.remove();
+    });
+
+
     project.todo.forEach((todoItem) => {
       // Dividing into different part for better looks
       let todoContainer = document.createElement("div");
@@ -66,7 +74,7 @@ function showTodo(projectName) {
       todoContainer.appendChild(secondLine);
 
       // Main part
-      // Line First   
+      // Line First
       let todoTitle = document.createElement("p");
       todoTitle.textContent = todoItem.title;
       firstLine.appendChild(todoTitle);
@@ -77,10 +85,10 @@ function showTodo(projectName) {
 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
-      checkbox.id = "Done";
+      checkbox.classList.add("Done");
       todoDueDate.appendChild(checkbox);
 
-      // Line second     
+      // Line second
       let todoDescription = document.createElement("p");
       todoDescription.textContent = todoItem.description;
       secondLine.appendChild(todoDescription);
@@ -88,10 +96,10 @@ function showTodo(projectName) {
       let todoPriority = document.createElement("p");
       todoPriority.textContent = "Priority: " + todoItem.priority;
       secondLine.appendChild(todoPriority);
-      
-      const span = document.createElement('span');
+
+      const span = document.createElement("span");
       span.innerHTML = "&#128465;";
-      span.id = "delete";
+      span.classList.add("remove");
       todoPriority.appendChild(span);
     });
   } else {
@@ -99,5 +107,4 @@ function showTodo(projectName) {
   }
 }
 
-export { left_side, right_side, showProject };
-export { showTodo };
+export { left_side, right_side, showProject, showTodo };
