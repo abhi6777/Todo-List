@@ -5,25 +5,56 @@ let body = document.querySelector("body");
 let left = document.querySelector("#left");
 let right = document.querySelector("#Right");
 
-let left_side = () => {
-  let addButton = document.createElement("h4");
-  addButton.innerHTML = "Add Projects";
+function left_side() {
+  // Create a div to contain the form
+  let divInput = document.createElement("div");
 
-  let link = document.createElement("a");
-  link.href = "#";
+  // Create the form element
+  let form = document.createElement("form");
+  form.classList.add("ProjectForm");
 
-  let linkImg = document.createElement("img");
-  linkImg.src = require("./add-button.png");
-  linkImg.classList.add("image");
+  // Create the input element for project name
+  let input = document.createElement("input");
+  input.type = "text";
+  input.classList.add("ProjectInput");
+  input.placeholder = "Add New Project";
 
-  let createDiv = document.createElement("div");
-  createDiv.classList.add("leftDiv");
-  left.appendChild(createDiv);
+  // Create the submit button
+  let button = document.createElement("button");
+  button.type = "submit";
+  button.classList.add("ProjectButton");
+  button.textContent = "Add";
 
-  link.appendChild(addButton);
-  link.appendChild(linkImg);
-  createDiv.appendChild(link);
-};
+  // Append the input and button elements to the form
+  form.appendChild(input);
+  form.appendChild(button);
+
+  // Append the form to the div
+  divInput.appendChild(form);
+
+  // Append the div to the left side of the page
+  left.appendChild(divInput);
+}
+
+// let left_side = () => {
+//   let addButton = document.createElement("h4");
+//   addButton.innerHTML = "Add Projects";
+
+//   let link = document.createElement("a");
+//   link.href = "#";
+
+//   let linkImg = document.createElement("img");
+//   linkImg.src = require("./add-button.png");
+//   linkImg.classList.add("image");
+
+//   let createDiv = document.createElement("div");
+//   createDiv.classList.add("leftDiv");
+//   left.appendChild(createDiv);
+
+//   link.appendChild(addButton);
+//   link.appendChild(linkImg);
+//   createDiv.appendChild(link);
+// };
 
 function showProject() {
   let projectDiv = document.createElement("div");
@@ -50,14 +81,27 @@ function showTodo(projectName) {
   // Find the project instance based on the project name
   let project = projectsList.find((project) => project.name === projectName);
 
+  // Add 'projectShow' class to the project matching the projectName
+  function mark() {
+    let projects = document.querySelectorAll(".project");
+    projects.forEach((project) => {
+      if (project.textContent === projectName) {
+        project.classList.add("projectShow");
+      } else {
+        project.classList.remove("projectShow");
+      }
+    });
+  }
+
+  mark();
+
   // If the project is found, display its todo items
   if (project) {
     // Remove previous projects todo
     let todo = document.querySelectorAll(".todoDiv");
-    todo.forEach(todo => {
+    todo.forEach((todo) => {
       todo.remove();
     });
-
 
     project.todo.forEach((todoItem) => {
       // Dividing into different part for better looks

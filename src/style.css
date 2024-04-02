@@ -114,6 +114,7 @@ a {
 
 .strike {
   text-decoration: line-through;
+  color: green;
 }
 
 .projectShow {
@@ -124,4 +125,20 @@ a {
   padding-bottom: 1rem;
   border: 2px solid white;
   border-radius: 0.7rem;
+}
+
+.ProjectInput,
+.ProjectButton {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-weight: bolder;
+}
+
+.ProjectButton:hover {
+  background-color: rgb(49, 222, 49);
+}
+
+.ProjectForm {
+  display: grid;
+  grid-auto-flow: column;
 }
