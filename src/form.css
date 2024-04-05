@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.FormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 450px;
+  background-color: rgb(165, 18, 99);
+  border-radius: 2rem;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.25);
+  opacity: 0;
+  transition: top 0ms ease-in-out 200ms, top 200ms ease-in-out 0ms,
+    top 20ms ease-in-out 0ms;
+}
+
+.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  transition: top 0ms ease-in-out 0ms, top 200ms ease-in-out 0ms,
+    top 20ms ease-in-out 0ms;
+}
+
+.FormContainer div {
+  margin: 20px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.FormContainer h2 {
+  margin: 0;
+  margin-top: 30px;
+}
+
+.FormContainer div input,
+#priority {
+  width: 250px;
+  height: 25px;
+  border-radius: 1rem;
+  padding-left: 10px;
+}
+
+.FormContainer div label {
+  margin: 5px;
+  font-weight: bold;
+}
+
+.FormContainer button {
+  margin: 20px;
+  border-radius: 1rem;
+  width: 100px;
+  height: 40px;
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  background-color: black;
+}
+
+.add:hover {
+  background-color: rgb(47, 181, 47);
+  cursor: pointer;
+}
+
+.cancel:hover {
+  background-color: red;
+  cursor: pointer;
+}
+
+.button {
+  display: grid;
+  grid-auto-flow: column;
+}

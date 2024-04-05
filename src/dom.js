@@ -36,26 +36,6 @@ function left_side() {
   left.appendChild(divInput);
 }
 
-// let left_side = () => {
-//   let addButton = document.createElement("h4");
-//   addButton.innerHTML = "Add Projects";
-
-//   let link = document.createElement("a");
-//   link.href = "#";
-
-//   let linkImg = document.createElement("img");
-//   linkImg.src = require("./add-button.png");
-//   linkImg.classList.add("image");
-
-//   let createDiv = document.createElement("div");
-//   createDiv.classList.add("leftDiv");
-//   left.appendChild(createDiv);
-
-//   link.appendChild(addButton);
-//   link.appendChild(linkImg);
-//   createDiv.appendChild(link);
-// };
-
 function showProject() {
   let projectDiv = document.createElement("div");
   projectDiv.classList.add("projects");
@@ -71,10 +51,19 @@ function showProject() {
 }
 
 let right_side = () => {
+  let div = document.createElement("div");
+  div.classList.add("rightSideTop");
+
   let heading = document.createElement("h3");
   heading.textContent = "ToDo List";
 
-  right.appendChild(heading);
+  let button = document.createElement("button");
+  button.textContent = "Add New Todo +";
+  button.classList.add("formAdd");
+
+  div.appendChild(heading);
+  div.appendChild(button);
+  right.appendChild(div);
 };
 
 function showTodo(projectName) {

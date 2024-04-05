@@ -74,6 +74,11 @@ a {
 .projects {
   cursor: pointer;
   font-weight: bold;
+  overflow-x: scroll;
+}
+
+.projects::-webkit-scrollbar {
+  display: none;
 }
 
 .firstLine {
@@ -141,4 +146,22 @@ a {
 .ProjectForm {
   display: grid;
   grid-auto-flow: column;
+}
+
+/* // right side top css  */
+.rightSideTop {
+  display: grid;
+  grid-auto-flow: column;
+  width: 80%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rightSideTop button {
+  height: 40px;
+  width: 150px;
+  background-color: blue;
+  border-radius: 10px;
+  font-weight: bolder;
+  color: aliceblue;
 }

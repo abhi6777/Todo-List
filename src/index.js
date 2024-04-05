@@ -2,7 +2,8 @@ import { left_side, right_side, showProject } from "./dom";
 import { Project, todo } from "./task";
 import { addProject, projectsList, addTodo } from "./fuctions";
 import { showTodo } from "./dom";
-import { listen } from "./eventListeners";
+import { listen, addNewProject } from "./eventListeners";
+import { form } from "./form";
 
 let body = document.querySelector("body");
 
@@ -107,4 +108,6 @@ left_side();
 right_side();
 showProject();
 showTodo("myProject");
+addNewProject();
+form();
 listen();
