@@ -4,6 +4,8 @@ import { addProject, projectsList, addTodo } from "./fuctions";
 import { showTodo } from "./dom";
 import { listen, addNewProject } from "./eventListeners";
 import { form } from "./form";
+import "../src/form.css"
+import "../src/style.css"
 
 let body = document.querySelector("body");
 
