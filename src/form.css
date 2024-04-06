@@ -27,6 +27,7 @@ body {
   opacity: 0;
   transition: top 0ms ease-in-out 200ms, top 200ms ease-in-out 0ms,
     top 20ms ease-in-out 0ms;
+  pointer-events: none;
 }
 
 .active {
@@ -34,6 +35,7 @@ body {
   opacity: 1;
   transition: top 0ms ease-in-out 0ms, top 200ms ease-in-out 0ms,
     top 20ms ease-in-out 0ms;
+  pointer-events: all;
 }
 
 .FormContainer div {
