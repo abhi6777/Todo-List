@@ -14,7 +14,7 @@ addProject("myProject");
 addProject("Hello");
 addProject("Hii");
 
-console.log(projectsList);
+// console.log(projectsList);
 
 function myProjectItems() {
   let currentDate = new Date().toISOString().split("T")[0];
