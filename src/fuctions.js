@@ -1,4 +1,5 @@
 import { todo,Project } from "./task";
+import { createItem, readItem, updateItem } from "./storage";
 
 // Array to store the projects name 
 let projectsList = [];
@@ -10,6 +11,8 @@ function addProject(projectName) {
      
      // Push the new project to the array of projects
      projectsList.push(newProject);
+
+
    };
 
 function addTodo(projectName, todoItem) {
