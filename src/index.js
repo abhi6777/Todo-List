@@ -6,6 +6,8 @@ import { listen, addNewProject } from "./eventListeners";
 import { form } from "./form";
 import "../src/form.css"
 import "../src/style.css"
+import { createItem, readItem, updateItem, clearStorage } from "./storage";
+
 
 let body = document.querySelector("body");
 
@@ -15,6 +17,8 @@ addProject("Hello");
 addProject("Hii");
 
 console.log(projectsList);
+console.log(readItem());
+// clearStorage();
 
 function myProjectItems() {
   let currentDate = new Date().toISOString().split("T")[0];
