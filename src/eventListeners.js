@@ -1,6 +1,7 @@
 import { showProject, showTodo } from "./dom";
 import { addProject, addTodo } from "./fuctions";
 import { Project, todo } from "./task";
+import { createItem, readItem, updateItem, clearStorage } from "./storage";
 
 let Todo = todo;
 
@@ -19,16 +20,49 @@ function mark() {
   });
 }
 
+// function removeTodo() {
+//   // Delete button if clicked the todo will be deleted
+//   let removeButton = document.querySelectorAll(".remove");
+//   removeButton.forEach((removeButton) => {
+//     removeButton.addEventListener("click", (event) => {
+//       let todoDiv = removeButton.closest(".todoDiv");
+//       todoDiv.remove();
+//     });
+//   });
+// }
+
 function removeTodo() {
   // Delete button if clicked the todo will be deleted
-  let removeButton = document.querySelectorAll(".remove");
-  removeButton.forEach((removeButton) => {
+  let removeButtons = document.querySelectorAll(".remove");
+  removeButtons.forEach((removeButton) => {
     removeButton.addEventListener("click", (event) => {
+      // Find the todo div
       let todoDiv = removeButton.closest(".todoDiv");
+      
+      // Find the project name associated with the todo
+      let projectName = document.querySelector(".projectShow").textContent;
+      
+      // Find the project instance based on the project name
+      let projectsList = readItem();
+      let project = projectsList.find((project) => project.name === projectName);
+      
+      // Find the index of the todo in the project's todo array
+      let todoIndex = project.todo.findIndex((todo) => todo.title === todoDiv.querySelector("p:first-child").textContent);
+      
+      // If the todo index is found, remove the todo from the project's todo array
+      if (todoIndex !== -1) {
+        project.todo.splice(todoIndex, 1);
+
+        // Update the local storage with the modified projects list
+        updateItem(projectsList);
+      }
+
+      // Remove the todo div from the DOM
       todoDiv.remove();
     });
   });
 }
+
 
 function changeTodo() {
   // if list of projects been clicked change the project todo task for upon that projects tasks
