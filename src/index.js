@@ -1,6 +1,7 @@
 import { left_side, right_side, showProject } from "./dom";
 import { Project, todo } from "./task";
-import { addProject, projectsList, addTodo } from "./fuctions";
+// removed import projectList array from importing after implimenting local storage
+import { addProject, addTodo } from "./fuctions";
 import { showTodo } from "./dom";
 import { listen, addNewProject } from "./eventListeners";
 import { form } from "./form";
@@ -11,12 +12,7 @@ import { createItem, readItem, updateItem, clearStorage } from "./storage";
 
 let body = document.querySelector("body");
 
-// Create a new project
-addProject("myProject");
-addProject("Hello");
-addProject("Hii");
-
-console.log(projectsList);
+// console.log(projectsList);
 console.log(readItem());
 // clearStorage();
 
@@ -104,9 +100,18 @@ function HelloItems() {
   addTodo("Hello", todo5);
 }
 
-// this is too add todo items in projects
-myProjectItems();
-HelloItems();
+// Check if there are existing projects in local storage
+const existingProjects = readItem();
+
+if (!existingProjects) {
+  // Create a new project
+  addProject("myProject");
+  addProject("Hello");
+  addProject("Hii");
+  // Add initial projects only if there are no existing projects in local storage
+  myProjectItems();
+  HelloItems();
+};
 
 
 // Display project on dom

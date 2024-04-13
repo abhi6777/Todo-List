@@ -4,7 +4,7 @@ import { createItem, readItem, updateItem } from "./storage";
 // Array to store the projects name 
 let projectsList = [];
 
-// old addproject function
+// old addproject before adding local storage function
 // Function to add a new project dynamically
 // function addProject(projectName) {
 //      // Create a new instance of the Project class with the provided name
@@ -18,8 +18,15 @@ let projectsList = [];
 // new addproject function 
 function addProject(projectName) {
   // Retrieve the current projects list from local storage
-  let projects = readItem() || []; 
-  // If no projects list exists, initialize it as an empty array
+  let projects = readItem();
+  if (projects == projectName) {
+    return console.log("already exists");
+  }
+
+  // If there are no existing projects, initialize an empty array
+  if (!projects) {
+    projects = [];
+  }
   
   // Create a new instance of the Project class with the provided name
   let newProject = new Project(projectName);
@@ -47,7 +54,7 @@ function addProject(projectName) {
 
 function addTodo(projectName, todoItem) {
   // Retrieve the projects list from local storage
-  let projects = readItem() || [];
+  let projects = readItem();
 
   // Find the project instance based on the project name
   let project = projects.find((project) => project.name === projectName);
@@ -63,5 +70,6 @@ function addTodo(projectName, todoItem) {
   }
 }
 
-   export {addProject, projectsList, addTodo};
+// Removed projectList from export after adding the local storage 
+export {addProject, addTodo};
    
