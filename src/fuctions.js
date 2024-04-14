@@ -70,6 +70,24 @@ function addTodo(projectName, todoItem) {
   }
 }
 
+function priorityColor() {
+  let priorities = document.querySelectorAll(".priority");
+  priorities.forEach(priority => {
+    let innerText = priority.textContent.toLowerCase();
+    let todoDiv = priority.closest(".todoDiv");
+    
+    if (innerText.includes("high")) {
+      todoDiv.style.backgroundColor = "#ba2929";
+    } else if (innerText.includes("medium")) {
+      todoDiv.style.backgroundColor = "#8d8f06";      
+      todoDiv.querySelector(".remove").style.color = "red";
+    } else {
+      todoDiv.style.backgroundColor = "#058512";
+    }
+  });
+}
+
+
 // Removed projectList from export after adding the local storage 
-export {addProject, addTodo};
+export {addProject, addTodo, priorityColor};
    

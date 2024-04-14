@@ -1,5 +1,5 @@
 import { showProject, showTodo } from "./dom";
-import { addProject, addTodo } from "./fuctions";
+import { addProject, addTodo, priorityColor } from "./fuctions";
 import { Project, todo } from "./task";
 import { createItem, readItem, updateItem, clearStorage } from "./storage";
 
@@ -13,8 +13,23 @@ function mark() {
       let todoDiv = checkbox.closest(".todoDiv");
       if (checkbox.checked) {
         todoDiv.classList.add("strike");
+        todoDiv.style.backgroundColor = "#0d0d0c";
       } else {
         todoDiv.classList.remove("strike");
+
+       // Find the priority element inside the todoDiv
+       let priorities = todoDiv.querySelector(".priority");
+       let innerText = priorities.textContent.toLowerCase();        
+
+       // Change the background color based on priority
+       if (innerText.includes("high")) {
+         todoDiv.style.backgroundColor = "#ba2929";
+       } else if (innerText.includes("medium")) {
+         todoDiv.style.backgroundColor = "#8d8f06";
+         todoDiv.querySelector(".remove").style.color = "red";
+       } else {
+         todoDiv.style.backgroundColor = "#058512";
+       }
       }
     });
   });
@@ -80,6 +95,7 @@ function changeTodo() {
       // After changing todo adding event listeners to each
       mark();
       removeTodo();
+      priorityColor();
     });
   });
 }
@@ -119,6 +135,9 @@ function listen() {
 
   // function to add todo tasks in the project
   addTodoForm();
+
+  // Open the form to update todo
+  updateFormOpen();
 }
 
 function addNewProject() {
@@ -185,7 +204,24 @@ function addTodoForm() {
 
     mark();
     removeTodo();
+    priorityColor();
   });
 }
+
+// function updateFormOpen() {
+//   let openForm = document.querySelector(".todoDiv");
+//   openForm.addEventListener("click", (event) => {
+//     let addClass = document.querySelector(".FormContainer");
+//     addClass.classList.add("active");
+//   });
+// }
+
+// function updateTodo() {
+//   let todoDiv =  document.querySelectorAll(".todoDiv");
+
+//   todoDiv.addEventListener("click", (event) => {
+//     todoDiv.style.backgroundColor = "black";
+//   })
+// }
 
 export { listen, addNewProject };

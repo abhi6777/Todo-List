@@ -1,13 +1,14 @@
 import { left_side, right_side, showProject } from "./dom";
 import { Project, todo } from "./task";
 // removed import projectList array from importing after implimenting local storage
-import { addProject, addTodo } from "./fuctions";
+import { addProject, addTodo, priorityColor } from "./fuctions";
 import { showTodo } from "./dom";
 import { listen, addNewProject } from "./eventListeners";
 import { form } from "./form";
 import "../src/form.css"
 import "../src/style.css"
 import { createItem, readItem, updateItem, clearStorage } from "./storage";
+import { updateForm } from "./updateForm";
 
 
 let body = document.querySelector("body");
@@ -24,14 +25,14 @@ function myProjectItems() {
     "Complete project",
     "Finish coding tasks",
     currentDate,
-    "High"
+    "Low"
   );
 
   let todo2 = new todo(
     "10min Exercise",
     "Morning Exercise Be on Track",
     currentDate,
-    "High"
+    "Medium"
   );
 
   let todo3 = new todo("study 1 Chapter", "Any book", currentDate, "High");
@@ -40,14 +41,14 @@ function myProjectItems() {
     "study 1 Chapter of college textBook",
     "To maintain study",
     currentDate,
-    "High"
+    "Low"
   );
 
   let todo5 = new todo(
     "Write code at least 1 Hour",
     "To maintain consistency",
     currentDate,
-    "High"
+    "Medium"
   );
 
   // Push the todo item to the project's todo array
@@ -66,14 +67,14 @@ function HelloItems() {
     "Do ToDo Project",
     "Finish coding tasks",
     currentDate,
-    "High"
+    "Low"
   );
 
   let todo2 = new todo(
     "10 min Exercise",
     "Morning Exercise Be on Track",
     currentDate,
-    "High"
+    "Medium"
   );
 
   let todo3 = new todo("study 1 Chapter", "Any book", currentDate, "High");
@@ -82,7 +83,7 @@ function HelloItems() {
     "study 1 Chapter of college textBook",
     "To maintain study",
     currentDate,
-    "High"
+    "Low"
   );
 
   let todo5 = new todo(
@@ -122,3 +123,5 @@ showTodo("myProject");
 addNewProject();
 form();
 listen();
+priorityColor();
+// updateForm();

@@ -78,7 +78,7 @@ function showTodo(projectName) {
   // Find the project instance based on the project name
   // fetching data from local storage 
   let projectsList = readItem();
-  
+
   let project = projectsList.find((project) => project.name === projectName);
 
   // Add 'projectShow' class to the project matching the projectName
@@ -139,6 +139,7 @@ function showTodo(projectName) {
 
       let todoPriority = document.createElement("p");
       todoPriority.textContent = "Priority: " + todoItem.priority;
+      todoPriority.classList.add("priority");
       secondLine.appendChild(todoPriority);
 
       const span = document.createElement("span");
