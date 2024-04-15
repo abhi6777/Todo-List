@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 
-.FormContainer {
+.FormContainer, .updateFormContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +30,7 @@ body {
   pointer-events: none;
 }
 
-.active {
+.active, .open {
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   transition: top 0ms ease-in-out 0ms, top 200ms ease-in-out 0ms,
@@ -38,7 +38,7 @@ body {
   pointer-events: all;
 }
 
-.FormContainer div {
+.FormContainer div, .updateFormContainer div {
   margin: 20px;
   display: grid;
   align-items: center;
@@ -51,19 +51,19 @@ body {
 }
 
 .FormContainer div input,
-#priority {
+#priority , .updateFormContainer div input, #updatePriority {
   width: 250px;
   height: 25px;
   border-radius: 1rem;
   padding-left: 10px;
 }
 
-.FormContainer div label {
+.FormContainer div label, .updateFormContainer div label {
   margin: 5px;
   font-weight: bold;
 }
 
-.FormContainer button {
+.FormContainer button, .updateFormContainer button {
   margin: 20px;
   border-radius: 1rem;
   width: 100px;
@@ -78,7 +78,7 @@ body {
   cursor: pointer;
 }
 
-.cancel:hover {
+.cancel:hover, .updateCancel:hover {
   background-color: red;
   cursor: pointer;
 }

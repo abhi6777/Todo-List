@@ -78,7 +78,6 @@ function removeTodo() {
   });
 }
 
-
 function changeTodo() {
   // if list of projects been clicked change the project todo task for upon that projects tasks
   let projects = document.querySelectorAll(".project");
@@ -96,6 +95,7 @@ function changeTodo() {
       mark();
       removeTodo();
       priorityColor();
+      updateFormOpen();
     });
   });
 }
@@ -138,11 +138,19 @@ function listen() {
 
   // Open the form to update todo
   updateFormOpen();
+
+  // Close the update form 
+  updateFormClose();
+
+  // update the form 
+  updateTodo();
 }
 
 function addNewProject() {
   // if project buttons is clicked add new project to projects array
   let projectButtons = document.querySelector(".ProjectButton");
+
+  let projects = readItem();
 
   // Add event listener to the button
   projectButtons.addEventListener("click", (event) => {
@@ -150,6 +158,18 @@ function addNewProject() {
 
   // Get the project name from the input field
   let projectName = document.querySelector(".ProjectInput").value;
+
+  if (projectName === "") {
+    return console.log("pls enter the Project Name");
+  }
+
+  // Check if the project name already exists
+  let projectExists = projects.some(project => project.name === projectName);
+  if (projectExists) {
+      document.querySelector(".ProjectInput").value = "";
+      console.log("This project already exists");
+      return;
+  }
 
   // Add the project to the projects array
   addProject(projectName);
@@ -183,6 +203,12 @@ function addTodoForm() {
     let description = document.querySelector("#description").value;
     let priority = document.querySelector("#priority").value;
 
+    if (title === "") {
+      let addClass = document.querySelector(".FormContainer");
+      addClass.classList.remove("active");
+      return console.log("pls enter the title");
+    }
+
     let todo = new Todo(title, description, date, priority);
 
     let projectNameElement = document.querySelector(".projectShow");
@@ -205,23 +231,116 @@ function addTodoForm() {
     mark();
     removeTodo();
     priorityColor();
+    updateFormOpen()
   });
 }
 
-// function updateFormOpen() {
-//   let openForm = document.querySelector(".todoDiv");
-//   openForm.addEventListener("click", (event) => {
-//     let addClass = document.querySelector(".FormContainer");
-//     addClass.classList.add("active");
-//   });
-// }
+function updateFormOpen() {
+  let todoDivs = document.querySelectorAll(".todoDiv");
 
-// function updateTodo() {
-//   let todoDiv =  document.querySelectorAll(".todoDiv");
+  todoDivs.forEach((todoDiv) => {
+    todoDiv.addEventListener("click", (event) => {
+      // Opening the update form by adding the "open" class
+      let addClass = document.querySelector(".updateFormContainer");
+      addClass.classList.add("open");
 
-//   todoDiv.addEventListener("click", (event) => {
-//     todoDiv.style.backgroundColor = "black";
-//   })
-// }
+      
+      let updateForm = document.querySelector(".updateFormContainer");
+      let titleInput = updateForm.querySelector("#updateTitle");
+      let descriptionInput = updateForm.querySelector("#updateDescription");
+      let dueDateInput = updateForm.querySelector("#updateDueDate");
+      let prioritySelect = updateForm.querySelector("#updatePriority");
 
-export { listen, addNewProject };
+      // Extract values from the clicked todo item
+      let title = todoDiv.querySelector(".updateTitle").textContent;
+      let description = todoDiv.querySelector(".updateDescription").textContent;
+      let dueDate = todoDiv.querySelector(".updateDueDate").textContent;
+      let priority = todoDiv.querySelector(".updatePriority").innerText;
+
+      function priorityOutput() {
+        // Example priority string
+        let priorityString = "Priority: Low hii";
+
+        // Split the string at the first whitespace
+        let priorityParts = priorityString.split(/\s(.+)/);
+
+        // Take the second part after splitting
+        let priority = priorityParts[1];
+
+        // Split the second part by whitespace
+        let priorityWords = priority.split(/\s+/);
+
+        // Take the first word after splitting
+        let actualPriority = priorityWords[0];
+
+        return actualPriority;
+      }
+      // Remove "Priority: " from the priority string
+      priority = priorityOutput();
+
+      // Populate the corresponding fields in the update form
+      titleInput.value = title;
+      descriptionInput.value = description;
+      dueDateInput.value = dueDate;
+      prioritySelect.value = priority;
+      // console.log(title, description, dueDate, priority)
+    });
+  });
+}
+
+function updateFormClose() {
+  let updateButton = document.querySelector(".updateCancel");
+
+  updateButton.addEventListener("click", (event) => {
+    let addClass = document.querySelector(".updateFormContainer");
+    addClass.classList.remove("open");
+  });
+}
+
+function updateTodo() {
+  // Select the update form
+  let updateForm = document.querySelector(".updateForm");
+
+  // Add event listener for form submission
+  updateForm.addEventListener("submit", (event) => {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Retrieve the updated values from the form fields
+    let updatedTitle = document.getElementById("updateTitle").value;
+    let updatedDescription = document.getElementById("updateDescription").value;
+    let updatedDueDate = document.getElementById("updateDueDate").value;
+    let updatedPriority = document.getElementById("updatePriority").value;
+
+    // Retrieve the todos from local storage
+    let todos = readItem();
+    console.log(todos);
+
+    // Loop through the todos to find the matching todo
+    todos.forEach(todo => {
+      if (todo.title === updatedTitle && todo.description === updatedDescription && todo.dueDate === updatedDueDate) {
+        // Update the found todo with the new values
+        todo.title = updatedTitle;
+        todo.description = updatedDescription;
+        todo.dueDate = updatedDueDate;
+        todo.priority = updatedPriority;
+      }
+    });
+
+    // Save the updated todos back to local storage
+    localStorage.setItem("todos", JSON.stringify(todos));
+
+    // Optionally, close the update form
+    let updateFormContainer = document.querySelector(".updateFormContainer");
+    updateFormContainer.classList.remove("open");
+
+    // Optionally, trigger other functions to update the UI
+    mark();
+    removeTodo();
+    priorityColor();
+  });
+}
+
+
+
+export { listen, addNewProject, updateFormOpen  };

@@ -120,10 +120,12 @@ function showTodo(projectName) {
       // Main part
       // Line First
       let todoTitle = document.createElement("p");
+      todoTitle.classList.add("updateTitle");
       todoTitle.textContent = todoItem.title;
       firstLine.appendChild(todoTitle);
 
       let todoDueDate = document.createElement("p");
+      todoDueDate.classList.add("updateDueDate");
       todoDueDate.textContent = todoItem.dueDate;
       firstLine.appendChild(todoDueDate);
 
@@ -134,11 +136,13 @@ function showTodo(projectName) {
 
       // Line second
       let todoDescription = document.createElement("p");
+      todoDescription.classList.add("updateDescription");
       todoDescription.textContent = todoItem.description;
       secondLine.appendChild(todoDescription);
 
       let todoPriority = document.createElement("p");
-      todoPriority.textContent = "Priority: " + todoItem.priority;
+      todoPriority.classList.add("updatePriority");
+      todoPriority.textContent = "Priority: " + todoItem.priority + " ";
       todoPriority.classList.add("priority");
       secondLine.appendChild(todoPriority);
 

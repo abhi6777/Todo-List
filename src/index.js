@@ -13,8 +13,8 @@ import { updateForm } from "./updateForm";
 
 let body = document.querySelector("body");
 
+// console.log(readItem());
 // console.log(projectsList);
-console.log(readItem());
 // clearStorage();
 
 function myProjectItems() {
@@ -122,6 +122,6 @@ showProject();
 showTodo("myProject");
 addNewProject();
 form();
-listen();
+updateForm();
 priorityColor();
-// updateForm();
+listen();
