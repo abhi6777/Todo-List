@@ -235,32 +235,77 @@ function addTodoForm() {
   });
 }
 
-function updateFormOpen() {
-  let todoDivs = document.querySelectorAll(".todoDiv");
+// old function
+// function updateFormOpen() {
+//   let todoDivs = document.querySelectorAll(".todoDiv");
 
-  todoDivs.forEach((todoDiv) => {
-    todoDiv.addEventListener("click", (event) => {
-      // Opening the update form by adding the "open" class
-      let addClass = document.querySelector(".updateFormContainer");
-      addClass.classList.add("open");
+//   todoDivs.forEach((todoDiv) => {
+//     todoDiv.addEventListener("click", (event) => {
+//       // Opening the update form by adding the "open" class
+//       let addClass = document.querySelector(".updateFormContainer");
+//       addClass.classList.add("open");
 
       
-      let updateForm = document.querySelector(".updateFormContainer");
-      let titleInput = updateForm.querySelector("#updateTitle");
-      let descriptionInput = updateForm.querySelector("#updateDescription");
-      let dueDateInput = updateForm.querySelector("#updateDueDate");
-      let prioritySelect = updateForm.querySelector("#updatePriority");
+//       let updateForm = document.querySelector(".updateFormContainer");
+//       let titleInput = updateForm.querySelector("#updateTitle");
+//       let descriptionInput = updateForm.querySelector("#updateDescription");
+//       let dueDateInput = updateForm.querySelector("#updateDueDate");
+//       let prioritySelect = updateForm.querySelector("#updatePriority");
+
+//       // Extract values from the clicked todo item
+//       let title = todoDiv.querySelector(".updateTitle").textContent;
+//       let description = todoDiv.querySelector(".updateDescription").textContent;
+//       let dueDate = todoDiv.querySelector(".updateDueDate").textContent;
+//       let priority = todoDiv.querySelector(".updatePriority").innerText;
+
+//       function priorityOutput() {
+//         // Example priority string
+//         let priorityString = "Priority: Low hii";
+
+//         // Split the string at the first whitespace
+//         let priorityParts = priorityString.split(/\s(.+)/);
+
+//         // Take the second part after splitting
+//         let priority = priorityParts[1];
+
+//         // Split the second part by whitespace
+//         let priorityWords = priority.split(/\s+/);
+
+//         // Take the first word after splitting
+//         let actualPriority = priorityWords[0];
+
+//         return actualPriority;
+//       }
+//       // Remove "Priority: " from the priority string
+//       priority = priorityOutput();
+
+//       // Populate the corresponding fields in the update form
+//       titleInput.value = title;
+//       descriptionInput.value = description;
+//       dueDateInput.value = dueDate;
+//       prioritySelect.value = priority;
+//     });
+//   });
+// }
+
+function updateFormOpen() {
+  let editButtons = document.querySelectorAll(".edit");
+
+  editButtons.forEach((editButton) => {
+    editButton.addEventListener("click", (event) => {
+      // Opening the update form by adding the "open" class
+      let updateFormContainer = document.querySelector(".updateFormContainer");
+      updateFormContainer.classList.add("open");
 
       // Extract values from the clicked todo item
+      let todoDiv = editButton.closest(".todoDiv");
       let title = todoDiv.querySelector(".updateTitle").textContent;
       let description = todoDiv.querySelector(".updateDescription").textContent;
-      let dueDate = todoDiv.querySelector(".updateDueDate").textContent;
+      let dueDate = todoDiv.querySelector(".updateDueDate").textContent.split(" ")[0];
       let priority = todoDiv.querySelector(".updatePriority").innerText;
 
-      function priorityOutput() {
-        // Example priority string
-        let priorityString = "Priority: Low hii";
-
+      // Function to extract priority value
+      function priorityOutput(priorityString) {
         // Split the string at the first whitespace
         let priorityParts = priorityString.split(/\s(.+)/);
 
@@ -275,16 +320,23 @@ function updateFormOpen() {
 
         return actualPriority;
       }
+
       // Remove "Priority: " from the priority string
-      priority = priorityOutput();
+      priority = priorityOutput(priority);
 
       // Populate the corresponding fields in the update form
-      titleInput.value = title;
-      descriptionInput.value = description;
-      dueDateInput.value = dueDate;
-      prioritySelect.value = priority;
+      let updateTitleInput = document.querySelector("#updateTitle");
+      let updateDescriptionInput = document.querySelector("#updateDescription");
+      let updateDueDateInput = document.querySelector("#updateDueDate");
+      let updatePrioritySelect = document.querySelector("#updatePriority");
+
+      updateTitleInput.value = title;
+      updateDescriptionInput.value = description;
+      updateDueDateInput.value = dueDate;
+      updatePrioritySelect.value = priority;
       // console.log(title, description, dueDate, priority)
     });
+
   });
 }
 

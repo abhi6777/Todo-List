@@ -165,3 +165,8 @@ a {
   font-weight: bolder;
   color: aliceblue;
 }
+
+.edit  {
+  color: white;
+  padding-left: 15px;
+}

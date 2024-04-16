@@ -134,6 +134,11 @@ function showTodo(projectName) {
       checkbox.classList.add("Done");
       todoDueDate.appendChild(checkbox);
 
+      const edit = document.createElement("span");
+      edit.innerHTML = " " + "&#128393;";
+      edit.classList.add("edit");
+      todoDueDate.appendChild(edit);
+
       // Line second
       let todoDescription = document.createElement("p");
       todoDescription.classList.add("updateDescription");
