@@ -300,6 +300,9 @@ function updateFormOpen() {
       // Extract values from the clicked todo item
       let todoDiv = editButton.closest(".todoDiv");
       let title = todoDiv.querySelector(".updateTitle").textContent;
+      // setting a class to retriever the value in another function 
+      let setClass = todoDiv.querySelector(".updateTitle");
+      setClass.classList.add("access");
       let description = todoDiv.querySelector(".updateDescription").textContent;
       let dueDate = todoDiv.querySelector(".updateDueDate").textContent.split(" ")[0];
       let priority = todoDiv.querySelector(".updatePriority").innerText;
@@ -349,50 +352,135 @@ function updateFormClose() {
   });
 }
 
+// function updateTodo() {
+//   // Select the update form
+//   let updateForm = document.querySelector(".rewrite");
+//   let todoTitle = updateForm.querySelector.closest(".updateTitle").value;
+
+//   // Add event listener for form submission
+//   updateForm.addEventListener("click", (event) => {
+//     // Prevent the default form submission behavior
+//     event.preventDefault();
+
+//     // Check if any field is empty
+//     if (!updatedTitle || !updatedDescription || !updatedDueDate || !updatedPriority) {
+//       alert("Please fill out all fields.");
+//       return;
+//     }
+
+//     // Retrieve the todos from local storage
+//     let projects = readItem();
+
+//     // Find the project instance based on the project name
+//     let projectName = document.querySelector(".projectShow").textContent;
+//     let project = projects.find(project => project.name === projectName);
+
+//     if (project) {
+//       // Find the todo item based on the title
+//       let todo = project.todo.find(todo => todo.title === todoTitle);
+
+//       // Update the found todo with the new values
+//       if (todo) {
+//         todo.title = document.getElementById("updateTitle").value;
+//         todo.description = document.getElementById("updateDescription").value;
+//         todo.dueDate = document.getElementById("updateDueDate").value;
+//         todo.priority = document.getElementById("updatePriority").value;
+
+//         // Save the updated todos back to local storage
+//         localStorage.setItem("projects", JSON.stringify(projects));
+
+//         // Optionally, close the update form
+//         let updateFormContainer = document.querySelector(".updateFormContainer");
+//         updateFormContainer.classList.remove("open");
+
+//         // Optionally, trigger other functions to update the UI
+//         mark();
+//         removeTodo();
+//         priorityColor();
+//       } else {
+//         alert("Todo not found.");
+//       }
+//     } else {
+//       alert("Project not found.");
+//     }
+//   });
+// }
+
 function updateTodo() {
   // Select the update form
-  let updateForm = document.querySelector(".updateForm");
+  let updateForm = document.querySelector(".rewrite");
 
   // Add event listener for form submission
-  updateForm.addEventListener("submit", (event) => {
-    // Prevent the default form submission behavior
-    event.preventDefault();
+  updateForm.addEventListener("click", (event) => {
+  // Prevent the default form submission behavior
+  event.preventDefault();
 
-    // Retrieve the updated values from the form fields
-    let updatedTitle = document.getElementById("updateTitle").value;
-    let updatedDescription = document.getElementById("updateDescription").value;
-    let updatedDueDate = document.getElementById("updateDueDate").value;
-    let updatedPriority = document.getElementById("updatePriority").value;
+  // retrieving project name 
+  let projectName = document.querySelector(".projectShow").innerText;
 
-    // Retrieve the todos from local storage
-    let todos = readItem();
-    console.log(todos);
+  // Retrieving title
+  let todoTitle = document.querySelector(".access").innerText;
 
-    // Loop through the todos to find the matching todo
-    todos.forEach(todo => {
-      if (todo.title === updatedTitle && todo.description === updatedDescription && todo.dueDate === updatedDueDate) {
-        // Update the found todo with the new values
-        todo.title = updatedTitle;
-        todo.description = updatedDescription;
-        todo.dueDate = updatedDueDate;
-        todo.priority = updatedPriority;
+  // creating a object to update todo 
+  let updateTitle = document.getElementById("updateTitle").value;
+  let updateDescription = document.getElementById("updateDescription").value;
+  let updateDate = document.getElementById("updateDueDate").value;
+  let updatePriority = document.getElementById("updatePriority").value;
+
+  let updatedTodo = {
+    title: updateTitle,
+    description: updateDescription,
+    dueDate: updateDate,
+    priority: updatePriority
+  };
+  
+  function update(projectName, todoTitle, updatedTodo) {
+    // Retrieve the projects list from local storage
+    let projects = readItem();
+  
+    // Find the project instance based on the project name
+    let project = projects.find(project => project.name === projectName);
+  
+    // If the project is found
+    if (project) {
+      // Find the todo item within the project's todo array based on its title
+      let todoToUpdate = project.todo.find(todo => todo.title === todoTitle);
+  
+      // If the todo item is found
+      if (todoToUpdate) {
+        // Update the todo item's properties with the provided updated todo
+        todoToUpdate.title = updatedTodo.title;
+        todoToUpdate.description = updatedTodo.description;
+        todoToUpdate.dueDate = updatedTodo.dueDate;
+        todoToUpdate.priority = updatedTodo.priority;
+  
+        // Update the projects list in local storage with the updated todo item
+        updateItem(projects);
+        
+        console.log(`Todo '${todoTitle}' updated successfully.`);
+      } else {
+        console.log(`Todo '${todoTitle}' not found in project '${projectName}'.`);
       }
-    });
+    } else {
+      console.log(`Project '${projectName}' not found.`);
+    }
+  }
+  
+  update(projectName, todoTitle, updatedTodo);
 
-    // Save the updated todos back to local storage
-    localStorage.setItem("todos", JSON.stringify(todos));
+  let removeAccess = document.querySelector(".access");
+  removeAccess.classList.remove("access");
 
-    // Optionally, close the update form
-    let updateFormContainer = document.querySelector(".updateFormContainer");
-    updateFormContainer.classList.remove("open");
+  // Optionally, close the update form
+  let updateFormContainer = document.querySelector(".updateFormContainer");
+  updateFormContainer.classList.remove("open");
 
-    // Optionally, trigger other functions to update the UI
-    mark();
-    removeTodo();
-    priorityColor();
+  // Optionally, trigger other functions to update the UI
+  mark();
+  removeTodo();
+  priorityColor();
   });
 }
-
 
 
 export { listen, addNewProject, updateFormOpen  };

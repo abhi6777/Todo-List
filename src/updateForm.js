@@ -90,7 +90,7 @@ function updateForm() {
      // Create and append buttons
      var addButton = document.createElement("button");
      addButton.setAttribute("type", "submit");
-     addButton.classList.add("updateForm");
+     addButton.classList.add("rewrite");
      addButton.textContent = "Update Todo";
      var cancelButton = document.createElement("button");
      cancelButton.classList.add("updateCancel");
