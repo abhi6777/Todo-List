@@ -476,9 +476,11 @@ function updateTodo() {
   updateFormContainer.classList.remove("open");
 
   // Optionally, trigger other functions to update the UI
+  showTodo(projectName);
   mark();
   removeTodo();
   priorityColor();
+  updateFormOpen();
   });
 }
 
